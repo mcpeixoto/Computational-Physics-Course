@@ -1,0 +1,53 @@
+Ficha 1 - Check
+
+Ficha 2 - Check
+- Visualização de ondas
+- Ajuste de dados
+- Resolver Equações
+--- Bisseção
+--- Secante
+--- Newton
+- Matrizes
+--- Inversa
+--- Decomposição LU
+--- Resolver sistemas
+
+Ficha 3 - Check
+- Matrizes (continuação)
+-- Caracteristica da matriz
+-- Resolver sistemas (foi p/casa)
+
+Ficha 4 - Check
+- Resolver equações
+--- Metodo do relaxamento
+- Resolver sistemas c/ numeros imaginários
+
+Ficha 5 - Check
+- Derivadas
+--- 2 e 3 pontos
+- Imagens
+- Integração
+--- Metodo dos retangulos
+--- Metodo do trapezio
+--- Metodo de Simpson
+
+Ficha 6 - Check
+- Integração (cont.)
+--- Monte Carlo
+- Cenas brownianas, histogramas e slines
+
+Ficha 7 - Check
+- Fourier
+--- DFT
+--- FFT
+
+
+
+
+Ver melhor:
+Ex 2 - Ficha 4
+Ex 5 - Ficha 4 (tive preguiça de o fazer)
+Ex 6 - Ficha 5 (tive preguiça de o fazer)
+Ex 2 - Ficha 6 
+Ex 4 - Ficha 6 (tive preguiça de o fazer)
+Ex 4 - Ficha 7 (Era TPC, provavelmente não é preciso ver)
