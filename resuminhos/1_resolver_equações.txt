@@ -1,5 +1,8 @@
 >>>>>>>> Resolver Equações <<<<<<<<<
 
+Aula teorica 4
+Ficha 2
+
 Nota: No que toca a escolher palpites, o 1º
 passo é sempre dar plot ao grafico de modo a o fazer.
 
@@ -45,3 +48,9 @@ com o eixo dos x irá dar-nos o novo palpite.
 NOTA: 
 - O palpite inicial tem de ser proximo do zero! 
 - Não pode ter derivada 0
+
+
+---->> RELAXAMENTO
+
+- basicamente, começando com um x0 inicial, substituimos na equação
+e obtemos um novo x0. Fazemos isto até o metodo convergir

@@ -1,0 +1,26 @@
+>>>>>>>> Derivadas <<<<<<<<<
+
+Aula teorica 6
+Ficha 5
+
+Nota: h é o espaçamento entre pontos
+
+
+---->> Derivada de 2 e 3 pontos de 1º ordem
+
+- Estes metodos são originários da expansão de taylor
+
+>>> Derivada de 1º ordem de 2 pontos (D4 - Aula 6)
+
+fk' = (fk+1 - fk) / h + O(h)
+
+>>> Derivada de 1º ordem de 3 pontos (D5 - Aula 6)
+
+fk' = (fk+1 - fk-1) / 2h + O(h**2)
+
+>>> Derivada de 1º ordem de 5 pontos (D6 - Aula 6)
+
+(..)
+
+
+---->> Derivada de 2 e 3 pontos de 2º ordem

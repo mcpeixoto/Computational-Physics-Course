@@ -1,0 +1,14 @@
+
+
+>>>>>>>> Fourier <<<<<<<<<
+
+Aula teorica 9
+Folha 7
+
+Na aula teórica temos exemplos de:
+- Forward/Inverse Discrete Fourier Transforms
+- DFT slows
+- Fast Fourier Transforms (FFT) 
+- FFT Vectorized
+
+Nota: Ex 3 da folha 7 usamos |ck|**2 (Energia)

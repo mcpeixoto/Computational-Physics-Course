@@ -2,7 +2,7 @@ Ficha 1 - Check
 
 Ficha 2 - Check
 - Visualização de ondas
-- Ajuste de dados
+- Ajuste de dados por minimos quadrados (!)
 - Resolver Equações
 --- Bisseção
 --- Secante
@@ -21,6 +21,7 @@ Ficha 4 - Check
 - Resolver equações
 --- Metodo do relaxamento
 - Resolver sistemas c/ numeros imaginários
+- Cena da BANDED
 
 Ficha 5 - Check
 - Derivadas
@@ -45,9 +46,16 @@ Ficha 7 - Check
 
 
 Ver melhor:
+VER PROP ERROS FICHA 1 (aula teo. 3)
+Ex 1 a) - Ficha 4 
 Ex 2 - Ficha 4
 Ex 5 - Ficha 4 (tive preguiça de o fazer)
+Ex 3 - Ficha 5 
 Ex 6 - Ficha 5 (tive preguiça de o fazer)
 Ex 2 - Ficha 6 
 Ex 4 - Ficha 6 (tive preguiça de o fazer)
+Ex 4 - Ficha 7 Dar check
 Ex 4 - Ficha 7 (Era TPC, provavelmente não é preciso ver)
+Ex 3 - Ficha 8
+
+Ver problemas de fisica (mola, ..)

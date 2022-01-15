@@ -1,0 +1,17 @@
+>>>>>>>> Random walk <<<<<<<<<
+
+Aula teorica 8 - A partir do 11
+Folha 6 - Ex 2
+
+Nota: No final desta aula tbm falamos 
+de **interpolação**, alg de horner e splines.
+
+
+> Basicamente,
+from numpy.random import normal as N
+
+X(t + dt) = X(t) + N(0, (δ)2dt; t, t + dt)
+
+# N(media, variancia, t0, t1)
+# t0 e t1 -> independencia estatistica
+

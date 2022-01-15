@@ -1,0 +1,41 @@
+>>>>>>>> Matrizes <<<<<<<<<
+
+Aula teorica 4 e 5 (a 5 tem valores proprios e eq. nao lineares)
+
+Ficha 2-3
+
+Random notas:
+- Retro eliminação requer N**3 operações
+
+- Se o pivot for pequeno pode dar merda -> Temos que afastar os 
+numeros pequenos da diagonal, caso contrario iriamos somar um numero
+gigante a algo relativamente pequeno
+
+- A Caracteristica da matriz = Nº de linhas independentes.
+
+---->> Inversa
+> Metodo de eliminação Gauss (?)
+
+- Basicamente temos a matriz que queremos inverter e uma matriz identidade
+- Fazemos todas as operações na matriz original de modo a que fique
+com a triangular inferior e superior a 0. Along the way, toda e qualquer operação
+na matriz original, também é feita na matriz identidade
+- No final a inversa é a matriz identidade original.
+
+---->> Decomposição LU
+
+- Podemos escrever um sist. de eq. lineares (matriz A) como o produto
+da matriz triangular inferior (L) e superior (U)
+
+A = L*U 
+
+Ou seja ficamos com este sistema (slide 44, aula teo. 4):
+    Ux = y
+    Ly = b
+
+Sendo as operações necessárias para para a resolver este sistema,
+bastante triviais e computacionalmente rápidas (é só substituir,e +/-)
+
+Portanto se fizemos a priori a decomposição LU podemos ser mega-fast
+a fazer calculos, basta alterar o vetor b 
+

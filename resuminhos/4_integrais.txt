@@ -1,0 +1,78 @@
+>>>>>>>> Integrais <<<<<<<<<
+
+Aula teorica 6 - A partir do 11
+Aula teorica 7 (Monte carlo, newton-cotes, romberg)
+
+Folha 5 - A partir do 5
+
+Nota: Na aula 7, basicamente so falamos de newton-cotes e o 
+metodo de romberg
+
+---->> Retângulos
+- Este metodo consiste em a cada ponto discreto da func, distanciado
+de h, fazer um retangulo. O resultado será o somatório destes retangulos
+
+- Não é muito eficaz pois exige h's pequenos => erro aceitável (mts pontos!)
+
+
+
+---->> Trapézio
+
+- O mesmo que a anterior, mas agora também somamos um trapezio no topo do
+retangulo (ver D16 - Aula 6)
+
+
+---->> Simpson
+
+- Consiste em aproximar a função entre os extremos de cada intervalo
+por uma parabola. Basicamente temos o retangulo + uma aproximação de grau
+2 dos extremos (dar check).
+
+- Ver formula (D19 - Aula 6)
+
+- Ler o D20 da aula 7 para um overview dos beneficios/por ser tao boa
+
+NOTA: 
+Não escala bem para varias dimensões, monte carlo is better.
+
+NOTA 2:
+Trapezio é exato se a função for de grau 1
+Simpson  é exato se a função for de grau 2 ou 3
+
+---->> Monte Carlo
+> Começa na aula 7 - D8
+> Geração de numeros aleatórios -> D12 Aula 7 (Von Neumann, ...); inicio da aula 8 
+>>>> VER D11 da aula 7 para o erro associado <<<<
+> Acaba na aula 8 D
+
+- É mais eficiente que simpson para integrais com várias variaveis
+mesmo que necessite de um N grande.
+
+
+>> Tiro ao alvo
+
+- Gerar um ponto aleatorio, se esse ponto estiver a baixo da func.
+vamos incrementar um contador. O resultado da integração é:
+ (contador / nº de tiros) * Area do retangulo.
+
+>> Metodo da rejeição
+
+Parece-me igual ao anterior wtf
+
+>> Metodo das agulhas
+
+D5-10 Aula 8
+
+>> Metodo da media dos pontos (folha 6)
+
+Basicamente tiramos varios pontos random, sacamos o f(pontos),
+tiramos a média disso e multiplicamos pelo intervalo de x.
+
+Por outras palavras estamos a sacar o ponto médio da func nesse intervalo
+e dps fazemos o integral multiplicando pelo deltaX
+
+
+
+
+
+

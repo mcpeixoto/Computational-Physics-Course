@@ -1,0 +1,58 @@
+>>>>>>>> EDO <<<<<<<<<
+
+Aula teorica 9 desde o D16 (intro)
+Aula teórica 10 (O stor fala de picard wtf)
+Folha 8
+
+
+
+Para obter soluções unicas de uma EDO de ordem n
+são necessárias n condições iniciais
+
+Nota: Nem sempre as condições iniciais precisam
+de ser para o mesmo ponto, se forem para pontos diferentes
+tbm da mas torna a resolução mais dificil TODO
+
+>>>>>>>> Integração de 1º Ordem <<<<<<<<<
+
+---->> Euler (D4-9)
+
+- Na pratica tamos a integrar ao passo de h, a cada passo
+usamos o x anterior para calcular o novo:
+
+for i in range(N):
+    x.append(x[i] + h * f(x[i], t[i]))
+
+- Impreciso, Erro proporcional a h (Exige h muito pequeno!)
+- É instavel e assunetruci
+
+>> Euler por aproximação do trapézio (D18)
+
+- Exige 2 avaliações de f
+- Erro O(h**3)
+
+---->> Runge-Kutta ordem 2 (D21)
+
+- Exige 2 avaliações de f
+- Erro O(h**3)
+
+---->> Runge-Kutta ordem 3 (D24)
+
+- Exige 3 avaliações de f
+- Erro O(h**4)
+
+---->> Runge-Kutta ordem 4 (D24)        <<< MAIS POPULAR (precisão & Desempenho)
+
+- Exige 3 avaliações de f
+- Erro O(h**5)
+
+
+--------------------------------------
+--------------------------------------
+WIP
+
+---->> MAIS DO QUE UMA VARIAVEL (D29)
+
+
+
+TODO: Euler ordem 2
