@@ -1,0 +1,47 @@
+>>>>>>>> Resolver Equações <<<<<<<<<
+
+Nota: No que toca a escolher palpites, o 1º
+passo é sempre dar plot ao grafico de modo a o fazer.
+
+
+---->> BISSEÇÃO 
+- Obj: Encontrar o zero
+- São definidos inicialmente 2 palpites pelo user,
+onde no meio deles está um zero da função.
+- Enquanto o thresthold ou a max depth nao for atingida,
+iremos calcular o ponto no meio dos 2 palpites (delta).
+>>> SE f(delta) * f(palpite1) for negativo-> retornar chamada recursiva
+da func, atualizado palpite2=delta
+>>> SE  f(delta) * f(palpite2) for negativo-> retornar chamada recursiva
+da func, atualizado palpite1=delta
+
+
+---->> SECANTE (quando não queres usar bisseção xD)
+- Obj: Encontrar o zero
+- São definidos inicialmente 2 palpites pelo user,
+onde no meio deles está um zero da função.
+
+- Enquanto o thresthold ou a max depth nao for atingida,
+iremos calcular o ponto onde a reta entre (p1, f(p1)) e (p2, f(p2))
+interseta o eixo dos x (vamos chamar esse x de P).
+>>> SE f(P) * f(p1) for negativo-> retornar chamada recursiva
+da func, atualizado p2=P
+>>> SE   f(P) * f(p2) for negativo-> retornar chamada recursiva
+da func, atualizado p1=P
+
+NOTA: Temos de ter cuidado ao escolher pontos, a reta entre 
+(p1, f(p1)) e (p2, f(p2)) pode não intersetar o eixo dos x, resultando 
+num erro :)
+
+
+---->> NEWTON (mais rapido que bisseção :P)
+- Obj: Encontrar o zero
+- Escolher um palpite proximo do zero da função
+
+- Enquanto o thresthold ou a max depth nao for atingida,
+iremos calcular TANGENTE nesse ponto. A interseção da TANGENTE
+com o eixo dos x irá dar-nos o novo palpite. 
+
+NOTA: 
+- O palpite inicial tem de ser proximo do zero! 
+- Não pode ter derivada 0
