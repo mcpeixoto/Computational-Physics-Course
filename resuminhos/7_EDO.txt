@@ -64,4 +64,38 @@ WIP
 
 
 
+>>> Aula 11 <<<
+
+---->> Metodo dos disparos
+
+- Vamos tentar encontrar as condições iniciais que correspondem
+as condições fronteira dadas
+
+
+Ex:
+d2x/dt2 = -g (projetil a cair)
+
+Isto implica que:
+dx/dt = y
+dy/dt = -g
+
+Ora sabemos a posição inicial e final
+Não sabemos a velocidade inicial
+
+
+- Basicamente, para resolver isto, usamos o metodo da bisseção 
+por exemplo para calcular a velocidade inicial.
+
+Ou seja, começamos com 2 guesses, calculamos a posição final, e comparando
+com a pos final do exercicio, ajustamos as guesses :)
+
+---->> Metodo da relaxação
+
+- Jacobi (instalvel, lento)
+
+- Gauss Seidel (D27)
+
+
+
+
 TODO: Euler ordem 2
