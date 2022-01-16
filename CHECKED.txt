@@ -24,6 +24,7 @@ Ficha 4 - Check
 - Cena da BANDED
 
 Ficha 5 - Check
+- Taylor
 - Derivadas
 --- 2 e 3 pontos
 - Imagens
@@ -48,14 +49,14 @@ Ficha 7 - Check
 Ver melhor:
 VER PROP ERROS FICHA 1 (aula teo. 3)
 Ex 1 a) - Ficha 4 
-Ex 2 - Ficha 4
-Ex 5 - Ficha 4 (tive preguiça de o fazer)
+Done - Ex 2 - Ficha 4
+Done - Ex 5 - Ficha 4 (tive preguiça de o fazer)
 Ex 3 - Ficha 5 
-Ex 6 - Ficha 5 (tive preguiça de o fazer)
-Ex 2 - Ficha 6 
-Ex 4 - Ficha 6 (tive preguiça de o fazer)
-Ex 4 - Ficha 7 Dar check
+VER MELHOR - Ex 6 - Ficha 5 (tive preguiça de o fazer)
+DONE - Ex 2 - Ficha 6 
+DONE - splines, é gira - Ex 4 - Ficha 6 (tive preguiça de o fazer)
 Ex 4 - Ficha 7 (Era TPC, provavelmente não é preciso ver)
-Ex 3 - Ficha 8
+VER AGAIN - Ex 3 - Ficha 8
+VER AGAIN - Ex 6, 7 - Ficha 8
 
 Ver problemas de fisica (mola, ..)

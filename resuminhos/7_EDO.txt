@@ -24,14 +24,23 @@ for i in range(N):
     x.append(x[i] + h * f(x[i], t[i]))
 
 - Impreciso, Erro proporcional a h (Exige h muito pequeno!)
-- É instavel e assunetruci
+- É instavel e assimétrico
 
 >> Euler por aproximação do trapézio (D18)
 
 - Exige 2 avaliações de f
 - Erro O(h**3)
 
----->> Runge-Kutta ordem 2 (D21)
+>> Euler + Valor da derivada no ponto médio (D19)
+
+- Usa o mesmo passo que Euler
+
+for i in range(N):
+    x.append(x[i] + h*fmed)
+
+(ver slides para formula do fmed)
+
+---->> Runge-Kutta ordem 2 (D21) (pelo que entendi é tipo o anterior?)
 
 - Exige 2 avaliações de f
 - Erro O(h**3)
