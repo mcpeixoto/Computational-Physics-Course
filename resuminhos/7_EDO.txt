@@ -93,8 +93,11 @@ com a pos final do exercicio, ajustamos as guesses :)
 
 - Jacobi (instalvel, lento)
 
+NAO SUBSTITUI
+
 - Gauss Seidel (D27)
 
+SUBSTIUI
 
 
 
