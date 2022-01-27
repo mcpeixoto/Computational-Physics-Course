@@ -74,20 +74,45 @@ Gmtx = sp.csr_matrix(Gmtx)
 def calcular_aceleração(positions):
     # ### O 1º passo será calcular a densidade, para dps calcular o potencial, para calcular o campo eletrico, para calcular a força
 
+    """ Why can't I calculate the density with this?
+    # O lado da nossa cell vai ser o tamanho
+    # da box a dividir pelo número de células
+    cell_side = box_side/grid_cells
+
+    # Initialize grid
+    density = np.zeros((int(box_side/cell_side),int(box_side/cell_side)))
+
+
+    for particle in positions:
+        x = particle[0]
+        y = particle[1]
+
+        # Calculate the cell idx
+        cell_x = np.floor(x/cell_side).astype(int)
+        cell_y = np.floor(y/cell_side).astype(int)
+
+        # Add the particle to the grid
+        # acording to its weights
+        hx = (x - cell_x*cell_side)/cell_side
+        hy = (y - cell_y*cell_side)/cell_side
+
+        density[cell_x,cell_y]     += hx*hy             #(1-hx)*(1-hy)
+        density[cell_x+1,cell_y]   += (1-hx)*hy
+        density[cell_x,cell_y+1]   += hx*(1-hy)         #(1-hx)*hy
+        density[cell_x+1,cell_y+1] += (1-hx)*(1-hy)
+    """
 
     x = positions[0]
     y = positions[1]
 
     # Make bins and count
-    hist_x, edges_x = np.histogram(x, bins=grid_cells, range=(0,side))
-    hist_y, edges_y = np.histogram(y, bins=grid_cells, range=(0,side))
+    hist_x, _ = np.histogram(x, bins=grid_cells, range=(0,side))
+    hist_y, _ = np.histogram(y, bins=grid_cells, range=(0,side))
 
     # De modo a obter a densidade temos de 
     # dividir o numero de particulas em cada bin pelo
     # tamanho do bin
     density = np.array([hist_x, hist_y], dtype=float)
-    density[:, 0] /= dx
-    density[:, 1] /= dy
 
 
     # Normalize
@@ -105,9 +130,11 @@ def calcular_aceleração(positions):
 
     
     # Interpolate grid value onto particle locations
-    E_x = np.interp(x, edges_x[:-1], E_grid_x)
-    E_y = np.interp(y, edges_y[:-1], E_grid_y) 
-    #weight_j * E_grid[j] + weight_jp1 * E_grid[jp1]
+    xp = np.linspace(0, side, num=grid_cells)
+    E_x = np.interp(positions[0], xp, E_grid_x)
+    E_y = np.interp(positions[1], xp, E_grid_y)
+    # Ex 50k
+    # edges_x.shape (501,)
 
     a = - np.array([E_x, E_y], dtype=float)
 
@@ -125,7 +152,7 @@ dt = 1
 t = 0
 
 # Simulation Main Loop
-for i in range(200):
+for i in range(50):
     if i % 2 == 0:
         plt.cla()
         fig.suptitle('t = %.2f' % t)
@@ -158,6 +185,9 @@ for i in range(200):
 
     # (1/2) kick
     velocities += acc * dt
+
+    # velocities 2, 50k
+    # acc = velocity
     
     # drift (and apply periodic boundary conditions)
     positions += velocities * dt
@@ -173,7 +203,6 @@ for i in range(200):
     # update time
     t += dt
     
-
 
 
 
