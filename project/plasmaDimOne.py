@@ -92,14 +92,14 @@ def calcular_aceleração(positions):
     density = density.astype(float)
 
     # Normalize
-    density *= n0  / (grid_cells * dx) 
+    density /= (grid_cells * dx) 
 
     ###################################
     ###### Potential Computation ######
     ###################################
 
     # Solve Poisson's Equation
-    phi_grid = banded(potential_vals, -(density-n0), 1, 1)
+    phi_grid = banded(potential_vals, n0-density, 1, 1)
 
     ###################################
     #### Eletric Field Computation ####
