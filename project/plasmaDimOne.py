@@ -9,19 +9,21 @@ from banded import banded
 
 ########## DEFINING PARAMETERS ##########
 
-side = 100          # Box side - width = height, its a box
-n_particles = 100000 # Number of particles
-grid_cells  = 1000   # Number of cells in the grid (to be used in the Poisson solver)
-n0 = 1              # average electron density TODO
-dx = dy = side/grid_cells   # Distance between grid points, its a box so dx=dy
-
+length = 100                # D=1 space length
+n_particles = 100000        # Number of particles
+grid_cells  = 1000          # Number of cells in the grid (to be used in the Poisson solver)
+n0 = 1                      # average electron density
+dx = length/grid_cells      # Distance between grid points
+dt = 1                      # Timestep
+t = 0                       # Initial time
 
 ##### Beam inicialization #####
 
-positions = np.random.rand( n_particles) * side   # Shape de 2, Nparticulas para x e y
+# Initialize random positions distributed by the length of the simulation
+positions = np.random.rand( n_particles) * length
 
 # Adicionar-lhes perturbação com um sin + espessura
-positions += 0.5*np.sin(2*np.pi*positions[0]/side) + np.random.rand(n_particles)*5
+positions += 0.5*np.sin(2*np.pi*positions[0]/length) + np.random.rand(n_particles)*5
 
 ## Definir as velocidades de cada particula
 velocities = np.ones(n_particles)
@@ -36,7 +38,7 @@ velocities[int(n_particles/2):] = low_beam_velocity
 
 # No que toca as velocidades em y, vamos dar-lhes uma
 # pequena peturbação com um sin
-velocities += 0.1*np.sin(2*np.pi*positions[0]/side) + 0.1*np.random.rand(n_particles)*5
+velocities += 0.1*np.sin(2*np.pi*positions[0]/length) + 0.1*np.random.rand(n_particles)*5
 
 
 
@@ -59,8 +61,8 @@ diags = np.array([-1,1])
 vals  = np.vstack((-e,e))
 first_derivative = sp.spdiags(vals, diags, grid_cells, grid_cells)
 first_derivative = sp.lil_matrix(first_derivative)
-first_derivative[0,-1] = -1
-first_derivative[-1,0] = 1
+first_derivative[0, -1] = -1
+first_derivative[-1, 0] = 1
 first_derivative /= (2*dx)
 first_derivative = sp.csr_matrix(first_derivative)
 
@@ -69,7 +71,7 @@ def calcular_aceleração(positions):
     # ### O 1º passo será calcular a densidade, para dps calcular o potencial, para calcular o campo eletrico, para calcular a força
 
     # Make bins and count
-    density, _ = np.histogram(positions, bins=grid_cells, range=(0,side))
+    density, _ = np.histogram(positions, bins=grid_cells, range=(0,length))
     density = density.astype(float)
 
     # De modo a obter a densidade temos de 
@@ -79,7 +81,7 @@ def calcular_aceleração(positions):
 
 
     # Normalize
-    density *= n0 * side / n_particles / dx
+    density *= n0 * length / n_particles / dx
 
 
     # Solve Poisson's Equation: laplacian(phi) = n-n0
@@ -91,7 +93,7 @@ def calcular_aceleração(positions):
 
     
     # Interpolate grid value onto particle locations
-    xp = np.linspace(0, side, num=grid_cells)
+    xp = np.linspace(0, length, num=grid_cells)
     E = np.interp(positions, xp, E_grid)
 
 
@@ -103,41 +105,76 @@ def calcular_aceleração(positions):
 
 ########## SIMULATION START ##########
 
+
+# Begin figure for plots
+fig = plt.figure(figsize=(15,12), dpi=100)
+
+
+# Calculate initial acceleration and push velocity
+# backwards by 1/2 the timestep
 acc = calcular_aceleração(positions)
-
-
-fig = plt.figure(figsize=(10,8), dpi=80)
-dt = 1
-t = 0
-
-
 velocities -= acc * dt
 
 # Simulation Main Loop
 for i in range(100):
+    # Plot
     if i % 2 == 0:
-        
+        # Particle distributions
+        plt.subplot(4, 2, 1)
+        plt.cla()
+        plt.title("Blue Distribution")
+        plt.hist(positions[:int(n_particles/2)], bins=50, range=(0,length), color='blue')
+        plt.xlabel("x")
+        plt.ylabel("Blue particles")
+
+        plt.subplot(4, 2, 2)
+        plt.cla()
+        plt.title("Red Distribution")
+        plt.hist(positions[int(n_particles/2):], bins=50, range=(0,length), color='red')
+        plt.xlabel("x")
+        plt.ylabel("Red particles")
+
+        # Particle phase space (individually)
+        plt.subplot(4, 2, 3)
+        plt.cla()
+        plt.title("Speed / Position")
+        plt.scatter(positions[:int(n_particles/2)], velocities[:int(n_particles/2)], s=.4,color='blue', alpha=0.5)
+        plt.xlabel("X Position")
+        plt.ylabel("X Speed")
+
+        plt.subplot(4, 2, 4)
+        plt.cla()
+        plt.title("Speed / Position")
+        plt.scatter(positions[int(n_particles/2):], velocities[int(n_particles/2):], s=.4,color='red', alpha=0.5)
+        plt.xlabel("X Position")
+        plt.ylabel("X Speed")
+
+        # Particle phase space (together)
+        plt.subplot(2, 1, 2)
         plt.cla()
         plt.title("Speed / Position")
         plt.scatter(positions[:int(n_particles/2)], velocities[:int(n_particles/2)], s=.4,color='blue', alpha=0.5)
         plt.scatter(positions[int(n_particles/2):], velocities[int(n_particles/2):], s=.4,color='red', alpha=0.5)
         plt.xlabel("X Position")
         plt.ylabel("X Speed")
+
+        # Pause plot
         plt.pause(0.01)
 
 
-    # update accelerations
+    # Update accelerations
     acc = calcular_aceleração(positions)
 
-    # (1/2) kick
+    # Update velocities & positions
     velocities += acc * dt
     positions += velocities * dt
 
+    # Particle in the cell, this dosen't let
+    # the particles run out of the box
+    positions = np.mod(positions, length)
 
-    positions = np.mod(positions, side)
 
-
-    # update time
+    # Update current timestep
     t += dt
     
 
