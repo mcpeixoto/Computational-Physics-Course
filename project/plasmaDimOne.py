@@ -19,26 +19,26 @@ t = 0                       # Initial time
 
 ##### Beam inicialization #####
 
+## Defining Positions
 # Initialize random positions distributed by the length of the simulation
 positions = np.random.rand( n_particles) * length
 
-# Adicionar-lhes perturbação com um sin + espessura
-positions += 0.5*np.sin(2*np.pi*positions[0]/length) + np.random.rand(n_particles)*5
+# Adding a perturbation with a sin
+positions += 0.5*np.sin(2*np.pi*positions/length)
 
-## Definir as velocidades de cada particula
+## Defining Velocities
 velocities = np.ones(n_particles)
 
-## Velocidade dos beams em x
+## Velocities of the two beams
 top_beam_velocity = 2
 low_beam_velocity = -2
 
-# Configurar as velocidades em x dos beams
+# Setting desired velocities
 velocities[:int(n_particles/2)] = top_beam_velocity
 velocities[int(n_particles/2):] = low_beam_velocity
 
-# No que toca as velocidades em y, vamos dar-lhes uma
-# pequena peturbação com um sin
-velocities += 0.1*np.sin(2*np.pi*positions[0]/length) + 0.1*np.random.rand(n_particles)*5
+# Adding a perturbation with a sin
+velocities += 0.2*np.sin(2*np.pi*positions[0]/length)
 
 
 
@@ -68,25 +68,27 @@ first_derivative = sp.csr_matrix(first_derivative)
 
 
 def calcular_aceleração(positions):
-    # ### O 1º passo será calcular a densidade, para dps calcular o potencial, para calcular o campo eletrico, para calcular a força
+    ###################################
+    ####### Density Computation #######
+    ###################################
 
     # Make bins and count
     density, _ = np.histogram(positions, bins=grid_cells, range=(0,length))
     density = density.astype(float)
 
-    # De modo a obter a densidade temos de 
-    # dividir o numero de particulas em cada bin pelo
-    # tamanho do bin
-
-
-
     # Normalize
     density *= n0 * length / n_particles / dx
 
+    ###################################
+    ###### Potential Computation ######
+    ###################################
 
     # Solve Poisson's Equation: laplacian(phi) = n-n0
     phi_grid = banded(potential_vals, density-n0, 1, 1)
 
+    ###################################
+    #### Eletric Field Computation ####
+    ###################################
 
     # Apply Derivative to get the Electric field
     E_grid = - first_derivative @ phi_grid
@@ -96,6 +98,9 @@ def calcular_aceleração(positions):
     xp = np.linspace(0, length, num=grid_cells)
     E = np.interp(positions, xp, E_grid)
 
+    ####################################
+    ##### Acceleration Computation #####
+    ####################################
 
     a = - E
 
