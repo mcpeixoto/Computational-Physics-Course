@@ -1,4 +1,3 @@
-
 import numpy as np
 import matplotlib.pyplot as plt
 from numpy import sqrt
@@ -6,16 +5,32 @@ import time
 import scipy.sparse as sp
 from scipy.sparse.linalg import spsolve
 from banded import banded
+import os
+from os.path import join, basename
+import imageio
+import glob
+from tqdm import tqdm
 
 ########## DEFINING PARAMETERS ##########
 
 length = 100                # D=1 space length
 n_particles = 100000        # Number of particles
 grid_cells  = 1000          # Number of cells in the grid (to be used in the Poisson solver)
-n0 = 1                      # average electron density
+n0 = 1                      # Average electron density
 dx = length/grid_cells      # Distance between grid points
 dt = 1                      # Timestep
 t = 0                       # Initial time
+
+project_root = join(os.getcwd(), 'project')
+save_graphs = True          # Boolean to save the graphs
+graphs_dir = 'graphs'       # Diretory for saving the graphs
+
+
+# Initialize directory
+graphs_dir = join(project_root, graphs_dir)
+# If the graphs directory doesn't exist, create it
+if not os.path.exists(graphs_dir):
+    os.makedirs(graphs_dir)
 
 ##### Beam inicialization #####
 
@@ -77,14 +92,14 @@ def calcular_aceleração(positions):
     density = density.astype(float)
 
     # Normalize
-    density *= n0 * length / n_particles / dx
+    density *= n0  / (grid_cells * dx) 
 
     ###################################
     ###### Potential Computation ######
     ###################################
 
-    # Solve Poisson's Equation: laplacian(phi) = n-n0
-    phi_grid = banded(potential_vals, density-n0, 1, 1)
+    # Solve Poisson's Equation
+    phi_grid = banded(potential_vals, -(density-n0), 1, 1)
 
     ###################################
     #### Eletric Field Computation ####
@@ -102,7 +117,7 @@ def calcular_aceleração(positions):
     ##### Acceleration Computation #####
     ####################################
 
-    a = - E
+    a = E
 
     return a
 
@@ -124,6 +139,9 @@ velocities -= acc * dt
 for i in range(100):
     # Plot
     if i % 2 == 0:
+        # Title
+        fig.suptitle(f'Plasma simulation t={t}', fontsize=20)
+
         # Particle distributions
         plt.subplot(4, 2, 1)
         plt.cla()
@@ -155,13 +173,20 @@ for i in range(100):
         plt.ylabel("X Speed")
 
         # Particle phase space (together)
-        plt.subplot(2, 1, 2)
+        subplot = plt.subplot(2, 1, 2)
         plt.cla()
         plt.title("Speed / Position")
         plt.scatter(positions[:int(n_particles/2)], velocities[:int(n_particles/2)], s=.4,color='blue', alpha=0.5)
         plt.scatter(positions[int(n_particles/2):], velocities[int(n_particles/2):], s=.4,color='red', alpha=0.5)
         plt.xlabel("X Position")
         plt.ylabel("X Speed")
+
+        plt.tight_layout()
+
+        # Save images
+        if save_graphs:
+            plt.savefig(join(graphs_dir, str(i) + ".png"))
+
 
         # Pause plot
         plt.pause(0.01)
@@ -181,9 +206,23 @@ for i in range(100):
 
     # Update current timestep
     t += dt
+
+
+
+### Make a gif out of the saved images
+
+if save_graphs:
+    print("[+] Making gif..")
+    images = []
+    for filename in tqdm(sorted(glob.glob(join(graphs_dir, "*.png")), key=lambda x:int(basename(x).split('.')[0]))):
+        print(filename)
+        for _ in range(2):
+            images.append(imageio.imread(filename))
+
     
+    imageio.mimsave(join(project_root, "animation.gif"), images)
 
-
+print("[+] Done!")
 
 
 
