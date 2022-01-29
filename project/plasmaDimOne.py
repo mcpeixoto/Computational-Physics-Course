@@ -141,7 +141,7 @@ for i in range(100):
     if i % 2 == 0:
         # Title
         fig.suptitle(f'Plasma simulation t={t}', fontsize=20)
-
+        
         # Particle distributions
         plt.subplot(4, 2, 1)
         plt.cla()
@@ -173,7 +173,7 @@ for i in range(100):
         plt.ylabel("X Speed")
 
         # Particle phase space (together)
-        subplot = plt.subplot(2, 1, 2)
+        #subplot = plt.subplot(2, 1, 2)
         plt.cla()
         plt.title("Speed / Position")
         plt.scatter(positions[:int(n_particles/2)], velocities[:int(n_particles/2)], s=.4,color='blue', alpha=0.5)
@@ -210,12 +210,10 @@ for i in range(100):
 
 
 ### Make a gif out of the saved images
-
 if save_graphs:
     print("[+] Making gif..")
     images = []
     for filename in tqdm(sorted(glob.glob(join(graphs_dir, "*.png")), key=lambda x:int(basename(x).split('.')[0]))):
-        print(filename)
         for _ in range(2):
             images.append(imageio.imread(filename))
 
