@@ -173,7 +173,7 @@ for i in range(100):
         plt.ylabel("X Speed")
 
         # Particle phase space (together)
-        #subplot = plt.subplot(2, 1, 2)
+        subplot = plt.subplot(2, 1, 2)
         plt.cla()
         plt.title("Speed / Position")
         plt.scatter(positions[:int(n_particles/2)], velocities[:int(n_particles/2)], s=.4,color='blue', alpha=0.5)
