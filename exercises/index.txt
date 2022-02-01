@@ -1,6 +1,6 @@
-Ficha 1 - Check
+Ficha 1 
 
-Ficha 2 - Check
+Ficha 2 
 - Visualização de ondas
 - Ajuste de dados por minimos quadrados (!)
 - Resolver Equações
@@ -12,18 +12,18 @@ Ficha 2 - Check
 --- Decomposição LU
 --- Resolver sistemas
 
-Ficha 3 - Check
+Ficha 3 
 - Matrizes (continuação)
 -- Caracteristica da matriz
 -- Resolver sistemas (foi p/casa)
 
-Ficha 4 - Check
+Ficha 4 
 - Resolver equações
 --- Metodo do relaxamento
 - Resolver sistemas c/ numeros imaginários
 - Cena da BANDED
 
-Ficha 5 - Check
+Ficha 5 
 - Taylor
 - Derivadas
 --- 2 e 3 pontos
@@ -33,12 +33,12 @@ Ficha 5 - Check
 --- Metodo do trapezio
 --- Metodo de Simpson
 
-Ficha 6 - Check
+Ficha 6 
 - Integração (cont.)
 --- Monte Carlo
 - Cenas brownianas, histogramas e slines
 
-Ficha 7 - Check
+Ficha 7 
 - Fourier
 --- DFT
 --- FFT
