@@ -10,7 +10,7 @@ from os.path import join, basename
 import imageio
 import glob
 from tqdm import tqdm
-project_root = join(os.getcwd(), 'project')
+project_root = join(os.getcwd())
 
 ########## DEFINING PARAMETERS ##########
 
