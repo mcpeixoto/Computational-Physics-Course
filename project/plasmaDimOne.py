@@ -16,7 +16,7 @@ from tqdm import tqdm
 length = 100                # D=1 space length
 n_particles = 100000        # Number of particles
 grid_cells  = 1000          # Number of cells in the grid (to be used in the Poisson solver)
-n0 = 1                      # Average electron density
+ni = 1                      # Average ion density
 dx = length/grid_cells      # Distance between grid points
 dt = 1                      # Timestep
 t = 0                       # Initial time
@@ -39,7 +39,7 @@ if not os.path.exists(graphs_dir):
 positions = np.random.rand( n_particles) * length
 
 # Adding a perturbation with a sin
-positions += 0.5*np.sin(2*np.pi*positions/length)
+positions += 0.1*np.sin(2*np.pi*positions/length)
 
 ## Defining Velocities
 velocities = np.ones(n_particles)
@@ -68,7 +68,6 @@ potential_vals[2][-1] = 0
 potential_vals  /= dx**2
 
 
-
 # Defining the matrix for the 1st derivative
 # computation of the eletric field
 e = np.ones(grid_cells)
@@ -88,18 +87,22 @@ def calcular_aceleração(positions):
     ###################################
 
     # Make bins and count
-    density, _ = np.histogram(positions, bins=grid_cells, range=(0,length))
-    density = density.astype(float)
+    # ne will be the average electron density
+    ne, _ = np.histogram(positions, bins=grid_cells, range=(0,length))
+    ne = ne.astype(float)
 
     # Normalize
-    density /= (grid_cells * dx) 
+    # Plasma needs to be globally charged neutral 
+    ne /= (grid_cells * dx)  
+
 
     ###################################
     ###### Potential Computation ######
     ###################################
 
     # Solve Poisson's Equation
-    phi_grid = banded(potential_vals, n0-density, 1, 1)
+    # Assuming e=1, rho = ni-ne
+    phi_grid = banded(potential_vals, ni-ne, 1, 1)
 
     ###################################
     #### Eletric Field Computation ####
@@ -107,7 +110,6 @@ def calcular_aceleração(positions):
 
     # Apply Derivative to get the Electric field
     E_grid = - first_derivative @ phi_grid
-
     
     # Interpolate grid value onto particle locations
     xp = np.linspace(0, length, num=grid_cells)
@@ -129,7 +131,7 @@ def calcular_aceleração(positions):
 # Begin figure for plots
 fig = plt.figure(figsize=(15,12), dpi=100)
 
-
+# Leapfrog method
 # Calculate initial acceleration and push velocity
 # backwards by 1/2 the timestep
 acc = calcular_aceleração(positions)
@@ -141,7 +143,7 @@ for i in range(100):
     if i % 2 == 0:
         # Title
         fig.suptitle(f'Plasma simulation t={t}', fontsize=20)
-        
+
         # Particle distributions
         plt.subplot(4, 2, 1)
         plt.cla()
@@ -174,6 +176,7 @@ for i in range(100):
 
         # Particle phase space (together)
         subplot = plt.subplot(2, 1, 2)
+
         plt.cla()
         plt.title("Speed / Position")
         plt.scatter(positions[:int(n_particles/2)], velocities[:int(n_particles/2)], s=.4,color='blue', alpha=0.5)
@@ -199,10 +202,9 @@ for i in range(100):
     velocities += acc * dt
     positions += velocities * dt
 
-    # Particle in the cell, this dosen't let
-    # the particles run out of the box
+    # Particle in the cell, they need to stay in the cell
+    # this dosen't let the particles run out of the simulation
     positions = np.mod(positions, length)
-
 
     # Update current timestep
     t += dt
@@ -221,6 +223,3 @@ if save_graphs:
     imageio.mimsave(join(project_root, "animation.gif"), images)
 
 print("[+] Done!")
-
-
-
