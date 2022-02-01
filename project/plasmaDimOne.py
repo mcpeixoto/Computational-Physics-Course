@@ -10,6 +10,7 @@ from os.path import join, basename
 import imageio
 import glob
 from tqdm import tqdm
+project_root = join(os.getcwd(), 'project')
 
 ########## DEFINING PARAMETERS ##########
 
@@ -20,8 +21,6 @@ ni = 1                      # Average ion density
 dx = length/grid_cells      # Distance between grid points
 dt = 1                      # Timestep
 t = 0                       # Initial time
-
-project_root = join(os.getcwd(), 'project')
 save_graphs = True          # Boolean to save the graphs
 graphs_dir = 'graphs'       # Diretory for saving the graphs
 
@@ -36,7 +35,7 @@ if not os.path.exists(graphs_dir):
 
 ## Defining Positions
 # Initialize random positions distributed by the length of the simulation
-positions = np.random.rand( n_particles) * length
+positions = np.random.rand(n_particles) * length
 
 # Adding a perturbation with a sin
 positions += 0.1*np.sin(2*np.pi*positions/length)
