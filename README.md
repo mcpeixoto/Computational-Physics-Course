@@ -10,9 +10,11 @@ This repository also includes the final report for this class.
 
 The **Two-stream Plasma instability** was simulated, and it's phase-space evolution plotted using the **Particle in Cell** method. This yielded results in accordance to alternative methods explored in previous papers, particularly using the **Vlasov equation**.
 
+You can read more about it on my report [here](report.pdf).
+
 ![](animation.gif) 
 
-You can read more about it [here](report.pdf)
+
 
 ## Authors
 - Miguel Caçador Peixoto, miguelpeixoto457@gmail.com
